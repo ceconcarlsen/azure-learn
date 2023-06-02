@@ -1,16 +1,15 @@
 const fs = require("fs").promises;
 const path = require("path");
 
-const items = await fs.readdir("stores");
-console.log(items); 
-
-const items = await fs.readdir("stores", { withFileTypes: true });
-for (let item of items) {
-  const type = item.isDirectory() ? "folder" : "file";
-  console.log(`${item.name}: ${type}`);
+async function readFile() {
+  const items = await fs.readdir("stores");
+  console.log(items);
+  console.log(__dirname); //same as pwd
 }
 
-function findFiles(folderName) {
+// readFile();
+
+async function findFiles(folderName) {
   const items = await fs.readdir(folderName, { withFileTypes: true });
   items.forEach((item) => {
     if (path.extname(item.name) === ".json") {
@@ -23,4 +22,39 @@ function findFiles(folderName) {
   });
 }
 
-findFiles("stores");
+// findFiles("stores");
+
+async function createDir() {
+  const pathToCreate = path.join(__dirname, "stores", "201", "newDirectory");
+
+  // create the salesTotal directory if it doesn't exist
+  try {
+    await fs.mkdir(pathToCreate);
+  } catch {
+    console.log(`${pathToCreate} already exists.`);
+  }
+}
+
+// createDir();
+
+async function readFileAsString() {
+  const buffer = await fs.readFile("stores/201/sales.json"); //retorna em binário
+  console.log(String(buffer));
+}
+
+async function readFileAsJson() {
+  const data = JSON.parse(await fs.readFile("stores/201/sales.json"));
+  console.log(data);
+}
+
+async function writeInFile() {
+  const data = JSON.parse(await fs.readFile("stores/201/sales.json"));
+  await fs.writeFile("salesTotals/totals.txt", data.total);
+
+  console.log(data);
+}
+
+readFileAsString();
+readFileAsJson();
+
+writeInFile();
