@@ -1,0 +1,16 @@
+{
+  "name": "tailwind-trader-api",
+  "version": "1.0.0",
+  "description": "API HTTP para gerenciar itens do banco de dados Tailwind Traders",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "database"
+  ],
+  "author": "Cecon",
+  "license": "ISC"
+}
