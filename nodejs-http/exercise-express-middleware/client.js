@@ -5,7 +5,7 @@ http.get(
     port: 3000,
     hostname: "localhost",
     path: "/users",
-    headers: {},
+    headers: { authorization: "secretpassword" },
   },
   (res) => {
     console.log("connected");
